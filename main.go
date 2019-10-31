@@ -22,6 +22,8 @@ import (
 // Config holds the application configuration
 type Config struct {
 	RepositoryPath string
+	CheckPaths     bool `envconfig:"default=true"`
+	CheckOwners    bool `envconfig:"default=true"`
 	Github         struct {
 		AccessToken string `envconfig:"optional"`
 		BaseURL     string `envconfig:"optional"`
@@ -33,6 +35,8 @@ type Config struct {
 
 func main() {
 	var cfg Config
+	var checks []check.Checker
+	var ghClient *github.Client
 	err := envconfig.Init(&cfg)
 	fatalOnError(err)
 
@@ -42,25 +46,39 @@ func main() {
 	defer cancelFunc()
 	cancelOnInterrupt(ctx, cancelFunc)
 
-	// init GitHub client
-	httpClient := http.DefaultClient
-	if cfg.Github.AccessToken != "" {
-		httpClient = oauth2.NewClient(ctx, oauth2.StaticTokenSource(
-			&oauth2.Token{AccessToken: cfg.Github.AccessToken},
-		))
+	// check are the both checks disabled
+	if !cfg.CheckPaths && !cfg.CheckOwners {
+		log.Error("No checks requested. Please set CHECK_PATHS or CHECK_OWNERS. Aborting...")
+		fatalOnError(err)
 	}
-
-	ghClient, err := newGithubClient(cfg, httpClient)
 	fatalOnError(err)
 
 	// init codeowners entries
 	codeownersEntries, err := codeowners.NewFromPath(cfg.RepositoryPath)
 	fatalOnError(err)
 
-	// aggregates checks
-	checks := []check.Checker{
-		check.NewFileExist(),
-		check.NewValidOwner(cfg.OwnerChecker, ghClient),
+	if cfg.CheckPaths {
+		checks = []check.Checker{
+			check.NewFileExist(),
+		}
+	}
+
+	if cfg.CheckOwners {
+		httpClient := http.DefaultClient
+		if cfg.Github.AccessToken != "" {
+			httpClient = oauth2.NewClient(ctx, oauth2.StaticTokenSource(
+				&oauth2.Token{AccessToken: cfg.Github.AccessToken},
+			))
+		}
+
+		ghClient, err = newGithubClient(cfg, httpClient)
+		fatalOnError(err)
+
+		checks = []check.Checker{
+			check.NewFileExist(),
+			check.NewValidOwner(cfg.OwnerChecker, ghClient),
+		}
+
 	}
 
 	// run check runner
