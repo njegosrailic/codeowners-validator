@@ -2,12 +2,13 @@ package codeowners_test
 
 import (
 	"fmt"
-	"github.com/mszostok/codeowners-validator/pkg/codeowners"
+	"path"
+	"testing"
+
+	"github.com/njegosrailic/codeowners-validator/pkg/codeowners"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"path"
-	"testing"
 )
 
 const sampleCodeownerFile = `

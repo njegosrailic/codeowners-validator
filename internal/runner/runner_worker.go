@@ -5,9 +5,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mszostok/codeowners-validator/internal/check"
-	"github.com/mszostok/codeowners-validator/internal/printer"
-	"github.com/mszostok/codeowners-validator/pkg/codeowners"
+	"github.com/njegosrailic/codeowners-validator/internal/check"
+	"github.com/njegosrailic/codeowners-validator/internal/printer"
+	"github.com/njegosrailic/codeowners-validator/pkg/codeowners"
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"

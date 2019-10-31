@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/google/go-github/github"
-	ctxutil "github.com/mszostok/codeowners-validator/internal/context"
+	ctxutil "github.com/njegosrailic/codeowners-validator/internal/context"
 )
 
 type ValidOwnerCheckerConfig struct {

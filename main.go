@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/mszostok/codeowners-validator/internal/check"
-	"github.com/mszostok/codeowners-validator/internal/runner"
-	"github.com/mszostok/codeowners-validator/pkg/codeowners"
-	"github.com/mszostok/codeowners-validator/pkg/url"
+	"github.com/njegosrailic/codeowners-validator/internal/check"
+	"github.com/njegosrailic/codeowners-validator/internal/runner"
+	"github.com/njegosrailic/codeowners-validator/pkg/codeowners"
+	"github.com/njegosrailic/codeowners-validator/pkg/url"
 
 	"github.com/google/go-github/github"
 	"github.com/sirupsen/logrus"

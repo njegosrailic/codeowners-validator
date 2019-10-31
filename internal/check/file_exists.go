@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	ctxutil "github.com/mszostok/codeowners-validator/internal/context"
+	ctxutil "github.com/njegosrailic/codeowners-validator/internal/context"
 	"github.com/pkg/errors"
 )
 

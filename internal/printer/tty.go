@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/mszostok/codeowners-validator/internal/check"
+	"github.com/njegosrailic/codeowners-validator/internal/check"
 )
 
 type TTYPrinter struct{}

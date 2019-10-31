@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mszostok/codeowners-validator/pkg/codeowners"
+	"github.com/njegosrailic/codeowners-validator/pkg/codeowners"
 )
 
 type (
