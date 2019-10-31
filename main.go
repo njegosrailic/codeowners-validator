@@ -57,13 +57,13 @@ func main() {
 	codeownersEntries, err := codeowners.NewFromPath(cfg.RepositoryPath)
 	fatalOnError(err)
 
-	if cfg.CheckPaths == true {
+	if cfg.CheckPaths {
 		checks = []check.Checker{
 			check.NewFileExist(),
 		}
 	}
 
-	if cfg.CheckOwners == true {
+	if cfg.CheckOwners {
 		httpClient := http.DefaultClient
 		if cfg.Github.AccessToken != "" {
 			httpClient = oauth2.NewClient(ctx, oauth2.StaticTokenSource(
