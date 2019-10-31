@@ -7,7 +7,7 @@ The Codeowners Validator project validates the GitHub [CODEOWNERS](https://help.
 
 ## Local Installation
 
-`go get -u github.com/mszostok/codeowners-validator`
+`go get -u github.com/njegosrailic/codeowners-validator`
 
 ## Usage
 
